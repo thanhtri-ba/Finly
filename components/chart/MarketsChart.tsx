@@ -19,11 +19,11 @@ export default async function MarketsChart({
 
   const stockQuotes = chart.quotes
     ? chart.quotes
-        .map((quote) => ({
+        .map((quote: any) => ({
           date: quote.date,
           close: quote.close?.toFixed(2),
         }))
-        .filter((quote) => quote.close !== undefined && quote.date !== null)
+        .filter((quote: any) => quote.close !== undefined && quote.date !== null)
     : []
 
   return (

@@ -2,7 +2,6 @@ import { cn } from "@/lib/utils"
 import { fetchChartData } from "@/lib/yahoo-finance/fetchChartData"
 import type { Interval, Range } from "@/types/yahoo-finance"
 import AreaClosedChart from "./AreaClosedChart"
-import yahooFinance from "yahoo-finance2"
 import { fetchQuote } from "@/lib/yahoo-finance/fetchQuote"
 
 interface StockGraphProps {
@@ -42,11 +41,11 @@ export default async function StockChart({
     )
 
   const ChartQuotes = chart.quotes
-    .map((quote) => ({
+    .map((quote: any) => ({
       date: quote.date,
       close: quote.close?.toFixed(2),
     }))
-    .filter((quote) => quote.close !== undefined && quote.date !== null)
+    .filter((quote: any) => quote.close !== undefined && quote.date !== null)
 
   return (
     <div className="h-[27.5rem] w-full">

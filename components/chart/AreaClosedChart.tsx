@@ -148,7 +148,7 @@ function Area({ mask, id, data, x, y, yScale, color }: AreaProps) {
   )
 }
 
-function GraphSlider({ data, width, height, top, state, dispatch }: any) {
+function GraphSlider({ data, width, height, top, state, dispatch, color }: any) {
   const xScale = useMemo(
     () => scalePoint().domain(data.map(toDate)).range([0, width]),
     [width, data]
@@ -197,7 +197,7 @@ function GraphSlider({ data, width, height, top, state, dispatch }: any) {
         y={y}
         top={top}
         yScale={yScale}
-        color="#3b82f6"
+        color={color}
       />
       <Area
         id="top"
@@ -206,7 +206,7 @@ function GraphSlider({ data, width, height, top, state, dispatch }: any) {
         y={y}
         yScale={yScale}
         top={top}
-        color="#3b82f6"
+        color={color}
         mask="url(#mask)"
       />
       {state.x && (
@@ -216,14 +216,14 @@ function GraphSlider({ data, width, height, top, state, dispatch }: any) {
             x2={state.x}
             y1={0}
             y2={height}
-            stroke="#3b82f6"
+            stroke={color}
             strokeWidth={2}
           />
           <circle
             cx={state.x}
             cy={yScale(state.close)}
             r={8}
-            fill="#3b82f6"
+            fill={color}
             stroke="#FFF"
             strokeWidth={3}
           />
@@ -246,6 +246,9 @@ export default function AreaClosedChart({ chartQuotes, range }: any) {
   const pathname = usePathname()
 
   const last = chartQuotes[chartQuotes.length - 1]
+  const first = chartQuotes[0]
+  const isIncreasing = last.close >= first.close
+  const color = isIncreasing ? "#22c55e" : "#ef4444"
 
   const initialState = {
     close: last.close,
@@ -313,7 +316,7 @@ export default function AreaClosedChart({ chartQuotes, range }: any) {
           {formattedDate}{" "}
           {range !== "3m" && range !== "1y" && "at " + formattedTime}
         </div>
-        <div className="text-3xl font-bold text-[#3b82f6]">
+        <div className="text-3xl font-bold" style={{ color }}>
           {formatCurrency(state.close)}
         </div>
       </div>
@@ -328,6 +331,7 @@ export default function AreaClosedChart({ chartQuotes, range }: any) {
                 top={0}
                 state={state}
                 dispatch={dispatch}
+                color={color}
               />
             )}
           </ParentSize>

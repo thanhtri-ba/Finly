@@ -4,7 +4,9 @@ import "./globals.css"
 import { ViewTransitions } from "next-view-transitions"
 import { ThemeProvider } from "@/components/ui/theme-provider"
 import Navigation from "@/components/ui/navigation"
-import Footer from "@/components/ui/footer"
+
+import { Suspense } from "react"
+import MarketTicker from "@/components/stocks/MarketTicker"
 
 const inter = Inter({ subsets: ["latin"] })
 
@@ -32,8 +34,10 @@ export default function RootLayout({
             disableTransitionOnChange
           >
             <Navigation />
-            <main className="container">{children}</main>
-            <Footer />
+            <Suspense fallback={<div className="h-10 w-full border-b bg-background" />}>
+              <MarketTicker />
+            </Suspense>
+            <main className="container mt-6 min-h-[calc(100vh-200px)]">{children}</main>
           </ThemeProvider>
         </body>
       </html>

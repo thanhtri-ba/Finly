@@ -25,8 +25,13 @@ export default function Navigation() {
   return (
     <header className="sticky top-0 z-40 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
       <div className="container">
-        <div className="flex w-full flex-row justify-between py-4">
-          <div>{pathname !== "/" && <GoBack />}</div>
+        <div className="flex w-full flex-row justify-between py-4 items-center">
+          <div className="flex items-center gap-4">
+             {pathname !== "/" && <GoBack />}
+             <Link href="/" className="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400">
+                Finly
+             </Link>
+          </div>
           <div className="flex flex-row items-center gap-2">
             <NavigationMenu>
               <NavigationMenuList>

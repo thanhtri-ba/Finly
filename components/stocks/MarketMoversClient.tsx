@@ -105,10 +105,10 @@ export default function MarketMoversClient({
                 </div>
                 <div
                   className={cn(
-                    "text-xs font-medium",
+                    "mt-1 inline-flex items-center rounded-md px-2 py-0.5 text-xs font-medium",
                     stock.regularMarketChange >= 0
-                      ? "text-green-600 dark:text-green-400"
-                      : "text-red-600 dark:text-red-400"
+                      ? "bg-green-100 text-green-700 dark:bg-green-500/10 dark:text-green-400"
+                      : "bg-red-100 text-red-700 dark:bg-red-500/10 dark:text-red-400"
                   )}
                 >
                   {stock.regularMarketChange > 0 ? "+" : ""}
